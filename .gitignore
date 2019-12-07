@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# face model
+model/
+
 # Distribution / packaging
 .Python
 build/
