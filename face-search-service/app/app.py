@@ -37,7 +37,37 @@ def person_register():
         train_labels, train_datas = face_encoding_data_service.list_face_encoding(open_key)
         if len(train_labels) > 0 and len(train_datas) > 0:
             train_model_service.train_model(train_labels, train_datas, get_open_key_model_path(open_key))
+    data = {
+        'success': True,
+        'msg': '注册成功',
+        'code': 200
+    }
+    return json.dumps(data)
 
+def person_search():
+    if request.method == 'POST':
+        base64_img = json.loads(request.get_data())['img']
+        open_key = json.loads(request.get_data())['open_key']
+        img = base64.b64decode(base64_data)
+        img_data = BytesIO(img)
+        im = Image.open(img_data)
+        im = im.convert('RGB')
+        image = np.array(im)
+        return json.dumps(predict_image(image,open_key))
+
+def predict_image(image,open_key):
+    model = tf.keras.models.load_model(get_open_key_model_path(open_key))
+    face_encode = face_recognition.face_encodings(image)
+    result = []
+    for j in range(len(face_encode)):
+        predictions1 = model.predict(np.array(face_encode[j]).reshape(1, 128))
+        print(predictions1)
+        if np.max(predictions1[0]) > 0.90:
+            print(np.argmax(predictions1[0]).dtype)
+            person_id = int(np.argmax(predictions1[0]))
+            print('第%d张脸是%s' % (j+1,person_id))
+            result.append(person_id)
+    return result
 
 def get_open_key_model_path(open_key):
     return 'model/' + open_key + '_model.h5'

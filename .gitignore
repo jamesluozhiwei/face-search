@@ -8,7 +8,7 @@ __pycache__/
 
 # face model
 model/
-
+.idea
 # Distribution / packaging
 .Python
 build/
