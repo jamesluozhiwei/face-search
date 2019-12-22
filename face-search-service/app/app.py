@@ -44,11 +44,12 @@ def person_register():
     }
     return json.dumps(data)
 
+@app.route('/person/search', methods=['GET', 'POST'])
 def person_search():
     if request.method == 'POST':
         base64_img = json.loads(request.get_data())['img']
         open_key = json.loads(request.get_data())['open_key']
-        img = base64.b64decode(base64_data)
+        img = base64.b64decode(base64_img)
         img_data = BytesIO(img)
         im = Image.open(img_data)
         im = im.convert('RGB')
