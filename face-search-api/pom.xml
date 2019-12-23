@@ -20,6 +20,9 @@
         <log4j.version>1.2.17</log4j.version>
         <mybatis-plus.version>3.3.0</mybatis-plus.version>
         <mybatis-starter.version>2.1.1</mybatis-starter.version>
+        <freemarker.version>2.3.29</freemarker.version>
+        <lombok.version>1.18.8</lombok.version>
+        <springfox-swagger.version>2.9.2</springfox-swagger.version>
     </properties>
 
     <dependencies>
@@ -66,6 +69,35 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus.version}</version>
         </dependency>
+        <!--crud 代码生成器-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
+        </dependency>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!--swagger 2-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-swagger.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
