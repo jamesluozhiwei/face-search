@@ -57,11 +57,11 @@ class FaceSearchApiApplicationTests {
 
             // 数据源配置
             DataSourceConfig dsc = new DataSourceConfig();
-            dsc.setUrl("jdbc:mysql://139.224.234.210:3306/db_face_search_service?useUnicode=true&useSSL=false&characterEncoding=utf8");
+            dsc.setUrl("jdbc:mysql://localhost:3306/db_face_search_service?useUnicode=true&useSSL=false&characterEncoding=utf8");
             // dsc.setSchemaName("public");
             dsc.setDriverName("com.mysql.jdbc.Driver");
             dsc.setUsername("root");
-            dsc.setPassword("lzw123456789+");
+            dsc.setPassword("123456");
             mpg.setDataSource(dsc);
 
             // 包配置

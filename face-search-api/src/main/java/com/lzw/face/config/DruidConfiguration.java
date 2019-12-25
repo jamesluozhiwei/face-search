@@ -6,12 +6,14 @@ import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
@@ -44,6 +46,8 @@ public class DruidConfiguration {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactoryBean  =  new MybatisSqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResource("classpath:/mapper/*/*.xml"));
+        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
         return sqlSessionFactoryBean.getObject();
     }
 
