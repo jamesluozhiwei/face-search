@@ -1,9 +1,9 @@
 package com.lzw.face.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lzw.face.entity.PersonData;
 import com.lzw.face.mapper.PersonDataMapper;
 import com.lzw.face.service.IPersonDataService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
