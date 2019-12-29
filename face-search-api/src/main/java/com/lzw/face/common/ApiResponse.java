@@ -20,6 +20,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ApiResponse<T> implements Serializable {
 
+    private static final long serialVersionUID = 7148968523462120644L;
     @ApiModelProperty("响应编码")
     private int code;
 
