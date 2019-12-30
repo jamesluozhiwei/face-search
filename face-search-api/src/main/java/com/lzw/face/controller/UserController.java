@@ -51,9 +51,8 @@ public class UserController {
      */
     @PostMapping("/users/registers/codes")
     @ApiOperation("发送注册邮箱验证码")
-    public ApiResponse sendCode(String email){
-
-        return ApiResponse.response(ApiResponseCode.NORMAL);
+    public ApiResponse sendCode(@RequestBody String email){
+        return userService.sendUserRegisterEmailCode(email);
     }
 
 }

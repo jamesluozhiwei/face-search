@@ -1,6 +1,7 @@
 package com.lzw.face.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lzw.face.common.ApiResponse;
 import com.lzw.face.entity.User;
 
 /**
@@ -13,6 +14,11 @@ import com.lzw.face.entity.User;
  */
 public interface IUserService extends IService<User> {
 
-
+    /**
+     * 发送邮箱注册验证码
+     * @param email
+     * @return
+     */
+    ApiResponse<Object> sendUserRegisterEmailCode(String email);
 
 }
