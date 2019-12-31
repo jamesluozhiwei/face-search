@@ -14,8 +14,17 @@ public enum ApiResponseCode {
     /**
      * 未知错误
      */
-    UN_KNOW_ERR(-1,"UN_KNOW_ERR")
+    UN_KNOW_ERR(-1,"UN_KNOW_ERR"),
 
+    /**
+     * 该邮箱已注册
+     */
+    EMAIL_HAD_REGISTERED(-101,"EMAIL_HAD_REGISTERED"),
+
+    /**
+     * 邮箱错误
+     */
+    EMAIL_ERROR(-102,"EMAIL_ERROR")
     ;
 
     /**
