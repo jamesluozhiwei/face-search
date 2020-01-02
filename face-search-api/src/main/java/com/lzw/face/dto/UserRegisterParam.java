@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -25,7 +26,17 @@ public class UserRegisterParam implements Serializable {
     @ApiModelProperty("邮箱")
     private String email;
 
+    @NotBlank
     @ApiModelProperty("验证码")
     private String code;
+
+    @ApiModelProperty(value = "手机号码")
+    private String tel;
+
+    @ApiModelProperty(value = "姓名")
+    private String name;
+
+    @ApiModelProperty(value = "公司")
+    private String company;
 
 }

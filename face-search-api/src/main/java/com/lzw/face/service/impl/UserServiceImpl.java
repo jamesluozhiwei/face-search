@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lzw.face.common.ApiResponse;
 import com.lzw.face.common.ApiResponseCode;
 import com.lzw.face.component.EmailMethod;
+import com.lzw.face.dto.UserRegisterParam;
 import com.lzw.face.entity.User;
 import com.lzw.face.mapper.UserMapper;
 import com.lzw.face.service.IUserService;
@@ -14,7 +15,9 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
+import java.time.LocalDateTime;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * <p>
@@ -60,5 +63,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return ApiResponse.response(ApiResponseCode.EMAIL_ERROR);
         }
         return ApiResponse.response(ApiResponseCode.NORMAL);
+    }
+
+    @Override
+    public ApiResponse<Object>userRegister(UserRegisterParam param) {
+        Integer count = this.baseMapper.selectCount(Wrappers.<User>lambdaQuery().eq(User::getEmail,param.getEmail()));
+        if (0 < count){
+            return ApiResponse.response(ApiResponseCode.EMAIL_HAD_REGISTERED);
+        }
+        String key = "user_register:" + param.getEmail();
+        String code = (String) redisTemplate.opsForValue().get(key);
+        if (null == code || !code.equals(param.getCode())){
+            return ApiResponse.response(ApiResponseCode.EMAIL_CODE_ERROR);
+        }
+        redisTemplate.delete(key);
+        User user = User.builder()
+                .company(param.getCompany())
+                .email(param.getEmail())
+                .name(param.getName())
+                .openKey(UUID.randomUUID().toString().replace("-",""))
+                .createTime(LocalDateTime.now())
+                .enableStatus(true)
+                .build();
+        super.baseMapper.insert(user);
+        return ApiResponse.response(ApiResponseCode.NORMAL,user.getOpenKey());
     }
 }

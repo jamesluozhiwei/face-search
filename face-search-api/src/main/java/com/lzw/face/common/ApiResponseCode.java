@@ -24,7 +24,11 @@ public enum ApiResponseCode {
     /**
      * 邮箱错误
      */
-    EMAIL_ERROR(-102,"EMAIL_ERROR")
+    EMAIL_ERROR(-102,"EMAIL_ERROR"),
+    /**
+     * 邮箱验证码错误
+     */
+    EMAIL_CODE_ERROR(-103,"EMAIL_CODE_ERROR")
     ;
 
     /**
