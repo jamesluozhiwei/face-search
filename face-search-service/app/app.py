@@ -1,21 +1,22 @@
 # coding: utf-8
-import face_recognition
-import numpy as np
-from flask import Flask, jsonify, request, redirect, abort, Response, app
-from flask_cors import CORS
-
-from PIL import Image
 import base64
 import json
-from io import BytesIO
 import re
+from io import BytesIO
+
+import face_recognition
+import numpy as np
 import tensorflow as tf
-import time
-import hmac
-import logging
+from PIL import Image
+from flask import Flask, jsonify, request, redirect, abort, Response
+from flask_cors import CORS
 
 import face_encoding_data_service
 import train_model_service
+
+
+app = Flask(__name__, static_url_path='', static_folder='dist')
+CORS(app, supports_credentials=True)
 
 
 @app.route('/person/register', methods=['GET', 'POST'])
@@ -44,6 +45,7 @@ def person_register():
     }
     return json.dumps(data)
 
+
 @app.route('/person/search', methods=['GET', 'POST'])
 def person_search():
     if request.method == 'POST':
@@ -54,9 +56,10 @@ def person_search():
         im = Image.open(img_data)
         im = im.convert('RGB')
         image = np.array(im)
-        return json.dumps(predict_image(image,open_key))
+        return json.dumps(predict_image(image, open_key))
 
-def predict_image(image,open_key):
+
+def predict_image(image, open_key):
     model = tf.keras.models.load_model(get_open_key_model_path(open_key))
     face_encode = face_recognition.face_encodings(image)
     result = []
@@ -70,5 +73,20 @@ def predict_image(image,open_key):
             result.append(person_id)
     return result
 
+
 def get_open_key_model_path(open_key):
     return 'model/' + open_key + '_model.h5'
+
+
+@app.route('/api/test', methods=['GET', 'POST'])
+def api_test():
+    data = {
+        'success': True,
+        'msg': 'SUCCESS',
+        'code': 200
+    }
+    return json.dumps(data)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5002, debug=True)
