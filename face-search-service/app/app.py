@@ -23,8 +23,8 @@ CORS(app, supports_credentials=True)
 def person_register():
     if request.method == 'POST':
         base64_img = json.loads(request.get_data())['imgData']
-        person_id = json.loads(request.get_data())['person_id']
-        open_key = json.loads(request.get_data())['open_key']
+        person_id = json.loads(request.get_data())['personId']
+        open_key = json.loads(request.get_data())['openKey']
         for i in range(len(base64_img)):
             base64_data = re.sub('^data:image/.+;base64,', '', base64_img[i])
             img = base64.b64decode(base64_data)
@@ -39,8 +39,8 @@ def person_register():
         if len(train_labels) > 0 and len(train_datas) > 0:
             train_model_service.train_model(train_labels, train_datas, get_open_key_model_path(open_key))
     data = {
-        'success': True,
-        'msg': '注册成功',
+        'result': True,
+        'msg': 'SUCCESS',
         'code': 200
     }
     return json.dumps(data)
@@ -50,13 +50,19 @@ def person_register():
 def person_search():
     if request.method == 'POST':
         base64_img = json.loads(request.get_data())['img']
-        open_key = json.loads(request.get_data())['open_key']
+        open_key = json.loads(request.get_data())['openKey']
         img = base64.b64decode(base64_img)
         img_data = BytesIO(img)
         im = Image.open(img_data)
         im = im.convert('RGB')
         image = np.array(im)
-        return json.dumps(predict_image(image, open_key))
+        result = predict_image(image, open_key)
+        data = {
+            'result': result,
+            'msg': 'SUCCESS',
+            'code': 200
+        }
+        return json.dumps(data)
 
 
 def predict_image(image, open_key):
@@ -81,7 +87,7 @@ def get_open_key_model_path(open_key):
 @app.route('/api/test', methods=['GET', 'POST'])
 def api_test():
     data = {
-        'success': True,
+        'result': True,
         'msg': 'SUCCESS',
         'code': 200
     }

@@ -66,7 +66,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public ApiResponse<Object>userRegister(UserRegisterParam param) {
+    public ApiResponse<Object> userRegister(UserRegisterParam param) {
         Integer count = this.baseMapper.selectCount(Wrappers.<User>lambdaQuery().eq(User::getEmail,param.getEmail()));
         if (0 < count){
             return ApiResponse.response(ApiResponseCode.EMAIL_HAD_REGISTERED);

@@ -39,3 +39,26 @@ spring:
         stat:
           mergeSql: true
           slowSqlMillis: 5000
+  mail:
+    default-encoding: UTF-8
+    port: 465
+    host: smtp.mxhichina.com
+    username: 123456
+    password: 123456
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+
+# 应用自定义参数
+site:
+  face:
+    host: localhost
+    port: 5002
+    http: http://

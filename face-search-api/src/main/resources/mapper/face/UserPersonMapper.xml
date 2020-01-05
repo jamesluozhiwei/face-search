@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lzw.face.mapper.UserPersonMapper">
 
+    <select id="listPersonTag" parameterType="map" resultType="string">
+        select
+            person_tag
+        from
+            tb_user_person
+        where
+            open_key = #{openKey}
+            and id in
+            (
+                <foreach collection="ids" item="id" separator=",">
+                    #{id}
+                </foreach>
+            )
+    </select>
+
 </mapper>

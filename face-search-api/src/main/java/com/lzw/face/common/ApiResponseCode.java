@@ -28,7 +28,11 @@ public enum ApiResponseCode {
     /**
      * 邮箱验证码错误
      */
-    EMAIL_CODE_ERROR(-103,"EMAIL_CODE_ERROR")
+    EMAIL_CODE_ERROR(-103,"EMAIL_CODE_ERROR"),
+    /**
+     * open key 不存在
+     */
+    OPEN_KEY_NOT_EXISTS(-104,"OPEN_KEY_NOT_EXISTS")
     ;
 
     /**
