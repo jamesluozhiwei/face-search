@@ -1,0 +1,9 @@
+FROM openjdk:8-alpine
+
+WORKDIR /usr/src/app
+
+ADD target/face-search-api.jar /usr/src/app/face-search-api.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","face-search-api.jar"]
