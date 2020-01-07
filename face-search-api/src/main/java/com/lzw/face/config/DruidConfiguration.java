@@ -46,7 +46,7 @@ public class DruidConfiguration {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactoryBean  =  new MybatisSqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResource("classpath:/mapper/*/*.xml"));
+        //sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResource("classpath*:mapper/*.xml"));
         sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
         return sqlSessionFactoryBean.getObject();
     }

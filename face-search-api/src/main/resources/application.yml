@@ -11,31 +11,31 @@ spring:
     host: localhost
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_face?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/db_face_search_service?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
-    #¼à¿ØÍ³¼ÆÀ¹½ØµÄfilters
+    #ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½filters
     filters: stat,wall,log4j
-    #druidÅäÖÃ
-    #ÅäÖÃ³õÊ¼»¯´óÐ¡/×îÐ¡/×î´ó
+    #druidï¿½ï¿½ï¿½ï¿½
+    #ï¿½ï¿½ï¿½Ã³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ð¡/ï¿½ï¿½Ð¡/ï¿½ï¿½ï¿½
     initialSize: 5
     minIdle: 5
     maxActive: 20
-    #»ñÈ¡Á¬½ÓµÈ´ý³¬Ê±Ê±¼ä
+    #ï¿½ï¿½È¡ï¿½ï¿½ï¿½ÓµÈ´ï¿½ï¿½ï¿½Ê±Ê±ï¿½ï¿½
     maxWait: 60000
-    #¼ä¸ô¶à¾Ã½øÐÐÒ»´Î¼ì²â£¬¼ì²âÐèÒª¹Ø±ÕµÄ¿ÕÏÐÁ¬½Ó
+    #ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Ò»ï¿½Î¼ï¿½â£¬ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ø±ÕµÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     timeBetweenEvictionRunsMillis: 60000
-    #Ò»¸öÁ¬½ÓÔÚ³ØÖÐ×îÐ¡Éú´æµÄÊ±¼ä
+    #Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
     minEvictableIdleTimeMillis: 300000
     validationQuery: SELECT 1 FROM DUAL
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
-    #´ò¿ªPSCache£¬²¢Ö¸¶¨Ã¿¸öÁ¬½ÓÉÏPSCacheµÄ´óÐ¡¡£oracleÉèÎªtrue£¬mysqlÉèÎªfalse¡£·Ö¿â·Ö±í½Ï¶àÍÆ¼öÉèÖÃÎªfalse
+    #ï¿½ï¿½PSCacheï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½PSCacheï¿½Ä´ï¿½Ð¡ï¿½ï¿½oracleï¿½ï¿½Îªtrueï¿½ï¿½mysqlï¿½ï¿½Îªfalseï¿½ï¿½ï¿½Ö¿ï¿½Ö±ï¿½Ï¶ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½Îªfalse
     poolPreparedStatements: false
     maxPoolPreparedStatementPerConnectionSize: 20
-    # Í¨¹ýconnectPropertiesÊôÐÔÀ´´ò¿ªmergeSql¹¦ÄÜ£»ÂýSQL¼ÇÂ¼
+    # Í¨ï¿½ï¿½connectPropertiesï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mergeSqlï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½SQLï¿½ï¿½Â¼
     connectionProperties:
       druid:
         stat:
@@ -57,10 +57,11 @@ spring:
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory
             port: 465
-
-# Ó¦ÓÃ×Ô¶¨Òå²ÎÊý
+# Ó¦ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 site:
   face:
     host: localhost
     port: 5002
     http: http://
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*/*.xml
