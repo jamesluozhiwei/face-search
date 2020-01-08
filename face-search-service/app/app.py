@@ -32,7 +32,8 @@ def person_register():
             im = Image.open(img_data)
             im = im.convert('RGB')
             img_array = np.array(im)
-            faces = face_recognition.face_locations(img_array)
+            # faces = face_recognition.face_locations(img_array)
+            faces = face_recognition.face_encodings(img_array)
             if len(faces) > 0:
                 face_encoding_data_service.save_person_encoding(person_id, json.dumps(faces[0].tolist()))
         train_labels, train_datas = face_encoding_data_service.list_face_encoding(open_key)
@@ -51,7 +52,8 @@ def person_search():
     if request.method == 'POST':
         base64_img = json.loads(request.get_data())['img']
         open_key = json.loads(request.get_data())['openKey']
-        img = base64.b64decode(base64_img)
+        base64_data = re.sub('^data:image/.+;base64,', '', base64_img)
+        img = base64.b64decode(base64_data)
         img_data = BytesIO(img)
         im = Image.open(img_data)
         im = im.convert('RGB')

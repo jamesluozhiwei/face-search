@@ -1,12 +1,12 @@
 import pymysql
 
 
-class DB():
+class self_db():
     def __init__(self, host='localhost', port=3306, db='', user='root', passwd='root', charset='utf8'):
         # 建立连接
         self.conn = pymysql.connect(host=host, port=port, db=db, user=user, passwd=passwd, charset=charset)
         # 创建游标，操作设置为字典类型
-        self.cur = self.conn.cursor(cursor=pymysql.cursors.DictCursor)
+        self.cur = self.conn.cursor()
 
     def __enter__(self):
         # 返回游标

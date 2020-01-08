@@ -1,5 +1,8 @@
 package com.lzw.face.component;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.lzw.face.common.ApiResponse;
 import com.lzw.face.common.ApiResponseCode;
 import com.lzw.face.constant.FaceServiceUrl;
@@ -39,7 +42,7 @@ public class FaceMethod {
      * @return
      */
     public boolean faceRegister(FaceRegisterParam param){
-        ApiResponse<Object> response = restTemplate.postForObject(this.http + this.host + this.port + FaceServiceUrl.FACE_REGISTER,param, ApiResponse.class);
+        ApiResponse<Object> response = this.postBody(FaceServiceUrl.FACE_REGISTER,param);
         if(null == response){
             return false;
         }
@@ -53,13 +56,32 @@ public class FaceMethod {
      */
     public List<Long> faceSearch(FaceSearchParam param){
         try {
-            ApiResponse<Object> response = restTemplate.postForObject(this.http + this.host + this.port + FaceServiceUrl.FACE_SEARCH,param, ApiResponse.class);
+            ApiResponse<Object> response = this.postBody(FaceServiceUrl.FACE_SEARCH,param);
             assert response != null && response.getResult() != null;
-            return (ArrayList<Long>)response.getResult();
+            JSONArray jsonArray = (JSONArray) response.getResult();
+            return jsonArray.toJavaList(Long.class);
         }catch (Exception e){
             log.error("face search error : ",e);
             return new ArrayList<>();
         }
+    }
+
+    /**
+     * 发送post请求
+     * @param mapping
+     * @param param
+     * @return
+     */
+    private ApiResponse<Object> postBody(String mapping,Object param){
+        String body = restTemplate.postForObject(this.http + this.host + ":" + this.port + mapping,param, String.class);
+        log.info("post response : {}",body);
+        try {
+            ApiResponse<Object> response = JSONObject.parseObject(body,ApiResponse.class);
+            return response;
+        }catch (JSONException e){
+            log.error("json parse object error:",e);
+        }
+        return null;
     }
 
 }

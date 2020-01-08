@@ -9,6 +9,7 @@ import com.lzw.face.dto.UserRegisterParam;
 import com.lzw.face.entity.User;
 import com.lzw.face.mapper.UserMapper;
 import com.lzw.face.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -27,6 +28,7 @@ import java.util.UUID;
  * @author jamesluozhiwei
  * @since 2019-12-23
  */
+@Slf4j
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
@@ -55,6 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             }
             code = randomCode.toString();
         }
+        log.info("email code:{} {}",email,code);
         redisTemplate.opsForValue().set(key,code,30 * 60 * 1000);
         try {
             this.emailMethod.sendTextEmail(email,"ccccyc用户注册邮箱验证码",code+"；打死都不要告诉别人，三十分钟内有限！");
