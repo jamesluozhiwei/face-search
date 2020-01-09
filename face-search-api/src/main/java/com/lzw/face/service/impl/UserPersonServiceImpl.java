@@ -52,9 +52,11 @@ public class UserPersonServiceImpl extends ServiceImpl<UserPersonMapper, UserPer
             .eq(UserPerson::getPersonTag,param.getPersonTag())
         );
         if (userPerson == null){
+            int personCount = super.baseMapper.selectCount(Wrappers.<UserPerson>lambdaQuery().eq(UserPerson::getOpenKey,openKey));
             userPerson = UserPerson.builder()
                     .openKey(openKey)
                     .personTag(param.getPersonTag())
+                    .personIndex(personCount)
                     .build();
             super.baseMapper.insert(userPerson);
         }
@@ -74,11 +76,11 @@ public class UserPersonServiceImpl extends ServiceImpl<UserPersonMapper, UserPer
         if (i == 0){
             return ApiResponse.response(ApiResponseCode.OPEN_KEY_NOT_EXISTS);
         }
-        List<Long> personIds = this.faceMethod.faceSearch(param);
-        if (personIds.size() == 0){
-            return ApiResponse.response(ApiResponseCode.NORMAL,personIds);
+        List<Integer> personIndexes = this.faceMethod.faceSearch(param);
+        if (personIndexes.size() == 0){
+            return ApiResponse.response(ApiResponseCode.NORMAL,personIndexes);
         }
-        Set<String> persons = super.baseMapper.listPersonTag(openKey,personIds);
+        Set<String> persons = super.baseMapper.listPersonTag(openKey,personIndexes);
         return ApiResponse.response(ApiResponseCode.NORMAL,persons);
     }
 }

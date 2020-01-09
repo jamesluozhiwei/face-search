@@ -1,5 +1,8 @@
 FROM jamesluozhiwei/face-search-env:1
 
+# model localtion
+VOLUME /usr/src/app/model
+
 WORKDIR /usr/src/app
 
 #ADD requirements.txt /usr/src/app/requirements.txt

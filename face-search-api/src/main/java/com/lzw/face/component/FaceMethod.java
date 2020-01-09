@@ -54,12 +54,12 @@ public class FaceMethod {
      * @param param
      * @return
      */
-    public List<Long> faceSearch(FaceSearchParam param){
+    public List<Integer> faceSearch(FaceSearchParam param){
         try {
             ApiResponse<Object> response = this.postBody(FaceServiceUrl.FACE_SEARCH,param);
             assert response != null && response.getResult() != null;
             JSONArray jsonArray = (JSONArray) response.getResult();
-            return jsonArray.toJavaList(Long.class);
+            return jsonArray.toJavaList(Integer.class);
         }catch (Exception e){
             log.error("face search error : ",e);
             return new ArrayList<>();

@@ -20,9 +20,9 @@ public interface UserPersonMapper extends BaseMapper<UserPerson> {
     /**
      * 获取人物标签
      * @param openKey
-     * @param ids
+     * @param indexes
      * @return
      */
-    Set<String> listPersonTag(@Param("openKey") String openKey,@Param("ids") List<Long> ids);
+    Set<String> listPersonTag(@Param("openKey") String openKey,@Param("indexes") List<Integer> indexes);
 
 }

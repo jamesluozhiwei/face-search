@@ -13,7 +13,7 @@ def list_face_encoding(open_key):
     conn = pymysql.connect(host=db_host, port=3306, user=db_user, password=db_password, database=db_name, charset='utf8')
     # 获得Cursor对象
     sql = "select \
-        tb_user_person.id, \
+        tb_user_person.person_index, \
         tb_person_data.face_encoding \
     from \
         tb_user_person \

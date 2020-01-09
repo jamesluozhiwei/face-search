@@ -53,7 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             Random random = new Random();
             StringBuilder randomCode = new StringBuilder();
             for (int i = 0; i < 6; i++) {
-                randomCode.append(String.valueOf(codeSequence[random.nextInt(36)]));
+                randomCode.append(codeSequence[random.nextInt(36)]);
             }
             code = randomCode.toString();
         }

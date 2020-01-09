@@ -40,5 +40,8 @@ public class UserPerson implements Serializable {
     @ApiModelProperty(value = "面向用户的唯一标识")
     private String personTag;
 
+    @ApiModelProperty("人物下标")
+    private int personIndex;
+
 
 }

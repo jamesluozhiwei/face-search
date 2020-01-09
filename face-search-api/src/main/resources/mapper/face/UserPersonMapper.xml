@@ -9,10 +9,10 @@
             tb_user_person
         where
             open_key = #{openKey}
-            and id in
+            and person_index in
             (
-                <foreach collection="ids" item="id" separator=",">
-                    #{id}
+                <foreach collection="indexes" item="index" separator=",">
+                    #{index}
                 </foreach>
             )
     </select>
