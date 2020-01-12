@@ -1,6 +1,7 @@
 # coding: utf-8
 import base64
 import json
+import os
 import re
 from io import BytesIO
 
@@ -32,7 +33,6 @@ def person_register():
             im = Image.open(img_data)
             im = im.convert('RGB')
             img_array = np.array(im)
-            # faces = face_recognition.face_locations(img_array)
             faces = face_recognition.face_encodings(img_array)
             if len(faces) > 0:
                 face_encoding_data_service.save_person_encoding(person_id, json.dumps(faces[0].tolist()))
@@ -68,9 +68,17 @@ def person_search():
 
 
 def predict_image(image, open_key):
-    model = tf.keras.models.load_model(get_open_key_model_path(open_key))
-    face_encode = face_recognition.face_encodings(image)
     result = []
+    model_path = get_open_key_model_path(open_key)
+    if not os.path.exists(model_path):
+        # 先训练数据
+        train_labels, train_datas = face_encoding_data_service.list_face_encoding(open_key)
+        if len(train_labels) > 0 and len(train_datas) > 0:
+            train_model_service.train_model(train_labels, train_datas, get_open_key_model_path(open_key))
+        else:
+            return result
+    model = tf.keras.models.load_model(model_path)
+    face_encode = face_recognition.face_encodings(image)
     for j in range(len(face_encode)):
         predictions1 = model.predict(np.array(face_encode[j]).reshape(1, 128))
         print(predictions1)
