@@ -19,6 +19,7 @@ import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -58,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             code = randomCode.toString();
         }
         log.info("email code:{} {}",email,code);
-        redisTemplate.opsForValue().set(key,code,30 * 60 * 1000);
+        redisTemplate.opsForValue().set(key,code,30 * 60 * 1000, TimeUnit.MILLISECONDS);
         try {
             this.emailMethod.sendTextEmail(email,"ccccyc用户注册邮箱验证码",code+"；打死都不要告诉别人，三十分钟内有限！");
         } catch (MessagingException e) {
@@ -90,5 +91,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 .build();
         super.baseMapper.insert(user);
         return ApiResponse.response(ApiResponseCode.NORMAL,user.getOpenKey());
+    }
+
+    @Override
+    public ApiResponse<Object> forgetOpenKey(String email) {
+        User user = this.baseMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getEmail,email));
+        if (null == user){
+            return ApiResponse.response(ApiResponseCode.EMAIL_HAD_REGISTERED);
+        }
+        try {
+            this.emailMethod.sendTextEmail(email,"ccccyc openKey","您的openKey为："+user.getOpenKey()+"请妥善保管");
+        } catch (MessagingException e) {
+            log.error("send email error:",e);
+            return ApiResponse.response(ApiResponseCode.EMAIL_ERROR);
+        }
+        return ApiResponse.response(ApiResponseCode.NORMAL,"openKey已发送至您的邮箱，请注意查收");
     }
 }

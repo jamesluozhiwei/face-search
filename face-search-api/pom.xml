@@ -142,6 +142,15 @@
                 <profileActive>dev</profileActive>
             </properties>
         </profile>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profileActive>prod</profileActive>
+            </properties>
+        </profile>
     </profiles>
 
 </project>

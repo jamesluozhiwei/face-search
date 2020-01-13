@@ -29,4 +29,10 @@ public interface IUserService extends IService<User> {
      */
     ApiResponse<Object> userRegister(UserRegisterParam param);
 
+    /**
+     * 忘记open key
+     * @param email
+     * @return
+     */
+    ApiResponse<Object> forgetOpenKey(String email);
 }

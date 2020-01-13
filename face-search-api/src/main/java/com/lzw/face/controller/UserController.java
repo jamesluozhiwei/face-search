@@ -52,4 +52,14 @@ public class UserController {
         return this.userService.sendUserRegisterEmailCode(email);
     }
 
+    /**
+     * 忘记OpenKey
+     * @param email
+     * @return
+     */
+    @PostMapping("/users/open-key/forget")
+    @ApiOperation("忘记OpenKey")
+    public ApiResponse forgetOpenKey(@RequestBody String email){
+        return this.userService.forgetOpenKey(email);
+    }
 }

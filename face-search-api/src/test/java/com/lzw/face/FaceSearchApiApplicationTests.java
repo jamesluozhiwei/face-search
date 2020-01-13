@@ -21,11 +21,16 @@ import java.util.List;
 import java.util.Scanner;
 
 @Slf4j
-@SpringBootTest
+//@SpringBootTest
 class FaceSearchApiApplicationTests {
 
-    @Test
+    //@Test
     void contextLoads() {
+        JdkSerializationRedisSerializer serializer = new JdkSerializationRedisSerializer();
+        String code = "ASDSAC";
+        byte[] encode = serializer.serialize(code);
+        Object decode = serializer.deserialize(encode);
+        log.info("code:{},encode:{},decode:{}",code,encode,decode);
     }
 
         /**
