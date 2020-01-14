@@ -35,6 +35,8 @@ public class FaceMethod {
 
     @Resource
     private RestTemplate restTemplate;
+    @Resource
+    private Base64Method base64Method;
 
     /**
      * 人脸注册
@@ -42,6 +44,13 @@ public class FaceMethod {
      * @return
      */
     public boolean faceRegister(FaceRegisterParam param){
+        List<String> images = param.getImgData();
+        for (int i = 0,len = images.size();i < len;i++){
+            if (this.base64Method.matchUrl(images.get(i))){
+                //将网络图片转base64
+                images.set(i,this.base64Method.encodeImageToBase64(images.get(i)));
+            }
+        }
         ApiResponse<Object> response = this.postBody(FaceServiceUrl.FACE_REGISTER,param);
         if(null == response){
             return false;
@@ -55,6 +64,10 @@ public class FaceMethod {
      * @return
      */
     public List<Integer> faceSearch(FaceSearchParam param){
+        if (this.base64Method.matchUrl(param.getImg())){
+            //将网络图片转base64
+            param.setImg(this.base64Method.encodeImageToBase64(param.getImg()));
+        }
         try {
             ApiResponse<Object> response = this.postBody(FaceServiceUrl.FACE_SEARCH,param);
             assert response != null && response.getResult() != null;

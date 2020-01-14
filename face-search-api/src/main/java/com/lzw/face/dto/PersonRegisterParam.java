@@ -37,7 +37,7 @@ public class PersonRegisterParam implements Serializable {
     private String personTag;
 
     @NotEmpty
-    @ApiModelProperty("人脸数据 |　base64数组 | 每张图片应当有且只有当前注册的这个人")
+    @ApiModelProperty("人脸数据 |　支持 base64数组 或 图片url | 每张图片应当有且只有当前注册的这个人")
     private List<String> imgData;
 
 }

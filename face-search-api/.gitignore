@@ -32,3 +32,4 @@ build/
 ### profile
 application-dev.yml
 application-prod.yml
+logs/

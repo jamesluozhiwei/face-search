@@ -1,6 +1,7 @@
 package com.lzw.face.dto;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,9 +27,11 @@ public class FaceSearchParam implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotBlank
+    @ApiModelProperty("")
     private String openKey;
 
     @NotBlank
+    @ApiModelProperty("人脸数据 |　支持 base64数组 或 图片url")
     private String img;
 
 }

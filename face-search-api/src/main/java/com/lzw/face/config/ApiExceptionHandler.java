@@ -2,6 +2,7 @@ package com.lzw.face.config;
 
 import com.lzw.face.common.ApiResponse;
 import com.lzw.face.common.ApiResponseCode;
+import com.lzw.face.exception.FaceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,19 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Slf4j
 @ControllerAdvice(basePackages = "com.lzw.face.controller")
 public class ApiExceptionHandler {
+
+    /**
+     * 接口调用异常
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(FaceException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public ApiResponse faceExceptionHandler(FaceException ex) {
+        log.error(ex.getMessage(),ex);
+        return ApiResponse.response(ApiResponseCode.API_USE_ERROR,ex.getMessage());
+    }
 
     /**
      * 运行时异常

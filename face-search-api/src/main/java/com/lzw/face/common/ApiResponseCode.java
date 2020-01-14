@@ -17,6 +17,11 @@ public enum ApiResponseCode {
     UN_KNOW_ERR(-1,"UN_KNOW_ERR"),
 
     /**
+     * 接口调用异常
+     */
+    API_USE_ERROR(-2,"API_USE_ERROR"),
+
+    /**
      * 该邮箱已注册
      */
     EMAIL_HAD_REGISTERED(-101,"EMAIL_HAD_REGISTERED"),

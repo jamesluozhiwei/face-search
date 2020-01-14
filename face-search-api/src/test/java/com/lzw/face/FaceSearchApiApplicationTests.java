@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import com.lzw.face.component.Base64Method;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,6 +32,16 @@ class FaceSearchApiApplicationTests {
         byte[] encode = serializer.serialize(code);
         Object decode = serializer.deserialize(encode);
         log.info("code:{},encode:{},decode:{}",code,encode,decode);
+    }
+
+    //@Resource
+    private Base64Method base64Method;
+
+    //@Test
+    void urlImageToBase64(){
+        String image = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578991266492&di=1144406d69d4689340ae073afbac4b12&imgtype=0&src=http%3A%2F%2Fimg.idol001.com%2Forigin%2F2015%2F02%2F07%2F0adbb733383ce4e3499bf62613b143421423308340.jpg";
+        String code = base64Method.encodeImageToBase64(image);
+        log.info("code : {}",code);
     }
 
         /**
