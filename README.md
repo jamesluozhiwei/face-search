@@ -91,4 +91,44 @@ docker run -d --name face-search-service1 -p 5002:5002 --mount type=bind,source=
 docker logs face-search-service1
 ```
 
-即可查看python 服务日志
+即可查看python 服务日志，如果没有异常信息则运行成功。
+
+## 部署Java API服务
+
+修改系统配置：
+
+applicaiton.yml
+
+- 修改数据库连接信息；
+
+- 修改邮箱账户信息；
+
+- 修改python提供的人脸服务地址；
+
+- 修改redis连接信息；
+
+示例：可以新建一个文件作为profile环境隔离: <code>application-dev.yml</code>
+
+```yml
+spring:
+  redis:
+    password: 123456
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_face_search_service?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  mail:
+    default-encoding: UTF-8
+    # 生产环境请使用465端口、本地可以使用25端口
+    port: 25
+    host: smtp.mxhichina.com
+    username: xxxxx@xxx.xxx
+    password: 123456
+```
+
+使用<code>Idea</code>直接运行或者使用<code>maven</code>打包成jar运行即可。
+
+访问：http://localhost:8080/swagger-ui.html 查看到API。
+
+演示地址：https://ccccyc.cn/face/swagger-ui.html
+
