@@ -39,7 +39,7 @@ public class SwaggerConfig {
                 //页面标题
                 .title("face search api")
                 //描述
-                .description("更多资料请查看：https://www.cqwxhn.xin")
+                .description("项目地址：https://github.com/jamesluozhiwei/face-search \n如有问题可通过邮箱联系本人：1484699019@qq.com \n博客地址：https://ccccyc.cn")
                 //版本号
                 .version("1.0.0")
                 .build();
