@@ -1,7 +1,7 @@
 # face-search
 ## 项目介绍
 
-基于face_recoginition+tensorflow的实现的人脸对多搜索、提供web接口。
+基于face_recognition+tensorflow的实现的人脸一对多搜索、提供web接口。
 
 - python完成具体的人脸对比搜索服务
 - Java完成人脸Api的调用并提供对外的web接口
@@ -128,7 +128,7 @@ spring:
 
 使用<code>Idea</code>直接运行或者使用<code>maven</code>打包成jar运行即可。
 
-访问：http://localhost:8080/swagger-ui.html 查看到API。
+访问：[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) 查看到API。
 
-演示地址：https://ccccyc.cn/face/swagger-ui.html
+演示地址：[https://ccccyc.cn/face/swagger-ui.html](https://ccccyc.cn/face/swagger-ui.html)
 
