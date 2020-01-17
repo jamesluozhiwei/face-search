@@ -27,7 +27,7 @@ public class FaceSearchParam implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @NotBlank
-    @ApiModelProperty("")
+    @ApiModelProperty("用户openKey")
     private String openKey;
 
     @NotBlank

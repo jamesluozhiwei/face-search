@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * @author James
+ * 启动类
+ * @author jamesluozhiwei
+ * @since 2019-12-23
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @MapperScan(value = "com.lzw.face.mapper")

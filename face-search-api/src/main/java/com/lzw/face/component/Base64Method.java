@@ -53,7 +53,7 @@ public class Base64Method {
             return base64Encoder.encodeToString(outputStream.toByteArray());
         } catch (IOException e) {
             log.error("download image error:",e);
-            throw new FaceException("获取网络图片失败，请确认您的url！");
+            throw new FaceException("获取网络图片("+image+")失败，请确认您的url！");
         }
     }
 

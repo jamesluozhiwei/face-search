@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 人脸注册参数
+ * 人脸注册参数 对应 python服务
  * @author jamesluozhiwei
  * @date 2020/01/05 14:07
  */
