@@ -22,7 +22,7 @@ macholib==1.11
 Markdown==3.1.1
 MarkupSafe==1.1.1
 numpy==1.17.0
-Pillow==6.1.0
+Pillow==9.0.0
 protobuf==3.9.1
 PyInstaller==3.5
 pymongo==3.9.0
